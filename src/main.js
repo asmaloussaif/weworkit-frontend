@@ -12,11 +12,13 @@ import DocsExample from '@/components/DocsExample'
 import DocsIcons from '@/components/DocsIcons'
 
 const app = createApp(App)
+
 app.use(createPinia())
 app.use(router)
-app.use(CoreuiVue)
+app.use(CoreuiVue) // Use CoreUI Vue plugin
+
 app.provide('icons', icons)
-app.component('CIcon', CIcon)
+// app.component('CIcon', CIcon) // Uncomment if you want to register CIcon globally
 app.component('DocsComponents', DocsComponents)
 app.component('DocsExample', DocsExample)
 app.component('DocsIcons', DocsIcons)

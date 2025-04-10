@@ -1,12 +1,6 @@
 <script setup>
 import { onBeforeMount } from 'vue'
-import { useColorModes } from '@coreui/vue'
-
 import { useThemeStore } from '@/stores/theme.js'
-
-const { isColorModeSet, setColorMode } = useColorModes(
-  'coreui-free-vue-admin-template-theme',
-)
 const currentTheme = useThemeStore()
 
 onBeforeMount(() => {
@@ -18,15 +12,17 @@ onBeforeMount(() => {
   }
 
   if (theme) {
-    setColorMode(theme)
+    currentTheme.theme = theme // Set the theme from the URL
     return
   }
 
-  if (isColorModeSet()) {
+  // If no theme parameter, use the stored theme
+  if (currentTheme.theme) {
     return
   }
 
-  setColorMode(currentTheme.theme)
+  // Optionally, set a default theme if no stored theme
+  currentTheme.theme = 'light' // Or any default theme you like
 })
 </script>
 
@@ -35,8 +31,6 @@ onBeforeMount(() => {
 </template>
 
 <style lang="scss">
-// Import Main styles for this application
-@use 'styles/style';
-// We use those styles to show code examples, you should remove them in your application.
-@use 'styles/examples';
+@use 'styles/style' as *;
+@use 'styles/examples' as *;
 </style>

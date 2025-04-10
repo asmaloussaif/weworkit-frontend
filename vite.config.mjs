@@ -16,18 +16,10 @@ export default defineConfig(() => {
     },
     resolve: {
       alias: [
-        // webpack path resolve to vitejs
-        {
-          find: /^~(.*)$/,
-          replacement: '$1',
-        },
-        {
-          find: '@/',
-          replacement: `${path.resolve(__dirname, 'src')}/`,
-        },
+        // No need to keep this unless you need special handling
         {
           find: '@',
-          replacement: path.resolve(__dirname, '/src'),
+          replacement: path.resolve(__dirname, 'src'), // Correct alias configuration
         },
       ],
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.scss'],
@@ -35,7 +27,7 @@ export default defineConfig(() => {
     server: {
       port: 3000,
       proxy: {
-        // https://vitejs.dev/config/server-options.html
+        // Configure proxy if needed
       },
     },
   }

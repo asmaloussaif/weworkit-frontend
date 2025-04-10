@@ -22,6 +22,12 @@ const routes = [
           ),
       },
       {
+        path: '/offers',
+        name: 'OfferList',
+        component: () => import('@/views/pages/OfferListPage.vue'),
+      },
+      
+      {
         path: '/theme',
         name: 'Theme',
         redirect: '/theme/typography',
@@ -275,7 +281,7 @@ const routes = [
   },
   {
     path: '/pages',
-    redirect: '/pages/404',
+    redirect: '/pages/profil',
     name: 'Pages',
     component: {
       render() {
@@ -284,9 +290,9 @@ const routes = [
     },
     children: [
       {
-        path: '404',
-        name: 'Page404',
-        component: () => import('@/views/pages/Page404'),
+        path: '/pages/profil',
+        name: 'profil',
+        component: () => import('@/views/pages/profil.vue'),
       },
       {
         path: '500',
@@ -316,4 +322,4 @@ const router = createRouter({
   },
 })
 
-export default router
+ export default router;
