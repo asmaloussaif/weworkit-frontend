@@ -27,6 +27,7 @@ const routes = [
         component: () => import('@/views/pages/OfferListPage.vue'),
       },
       
+      
       {
         path: '/theme',
         name: 'Theme',
@@ -293,6 +294,11 @@ const routes = [
         path: '/pages/profil',
         name: 'profil',
         component: () => import('@/views/pages/profil.vue'),
+      },
+      {
+        path: '/pages/messages',
+        name: 'Messages',
+        component: () => import('@/views/pages/Messages.vue'),
       },
       {
         path: '500',
