@@ -16,9 +16,9 @@
           <form @submit.prevent="handleRegister">
             <div class="form">
               <input required type="text" class="w100" v-model="firstName" placeholder="First Name" />
-              <input required type="text" class="w100" v-model="lastName" placeholder="Last Name" />
-              <input required type="email" class="w100" v-model="email.value" placeholder="Email" />
-              <input required type="password" class="w100" v-model="password.value" placeholder="Password" />
+              <input required type="email" class="w100" v-model="email" placeholder="Email" />
+              <input required type="password" class="w100" v-model="password" placeholder="Password" />
+              <input required type="password" class="w100" v-model="confirmPassword" placeholder="Confirm Password" />
 
               <select v-model="role" class="w100" required>
                 <option disabled value="">Select your role</option>
@@ -26,6 +26,11 @@
                 <option value="freelance">Freelance</option>
               </select>
             </div>
+
+            <div class="forgot-password">
+              <router-link to="/pages/forgot-password">Forgot password?</router-link>
+            </div>
+
             <button type="submit" class="action" :class="{ 'action-disabled': !registerValid }">Create Account</button>
           </form>
         </div>
@@ -38,25 +43,29 @@
 import { ref, computed } from 'vue'
 
 const firstName = ref('')
-const lastName = ref('')
 const role = ref('')
-const email = ref({ value: '', error: false })
-const password = ref({ value: '', error: false })
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
 
-const registerValid = computed(() => 
-  firstName.value && lastName.value && role.value && email.value.value && password.value.value
+const registerValid = computed(() =>
+  firstName.value &&
+  role.value &&
+  email.value &&
+  password.value &&
+  confirmPassword.value &&
+  password.value === confirmPassword.value
 )
 
 const handleRegister = () => {
-  if (registerValid.value) {
-    console.log('Registration successful:', {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      email: email.value.value,
-      password: password.value.value,
-      role: role.value,
-    })
-  }
+  if (!registerValid.value) return
+
+  console.log('Registration successful:', {
+    firstName: firstName.value,
+    email: email.value,
+    password: password.value,
+    role: role.value,
+  })
 }
 </script>
 
@@ -121,5 +130,14 @@ const handleRegister = () => {
 .action-disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+.forgot-password {
+  text-align: right;
+  margin-bottom: 12px;
+}
+.forgot-password a {
+  font-size: 13px;
+  color: #007bff;
+  text-decoration: none;
 }
 </style>

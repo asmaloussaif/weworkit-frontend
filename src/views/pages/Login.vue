@@ -5,7 +5,10 @@
       <div class="inner">
         <div class="signIn">
           <div class="top">
-            <img class="logo" src="https://res.cloudinary.com/dc3c8nrut/image/upload/v1685298768/logo-placeholder_l3yodl.png" />
+            <img
+              class="logo"
+              src="https://res.cloudinary.com/dc3c8nrut/image/upload/v1685298768/logo-placeholder_l3yodl.png"
+            />
             <div class="title">Sign in</div>
             <div class="subtitle">
               Don't have an account?
@@ -15,9 +18,14 @@
 
           <form @submit.prevent="handleLogin">
             <div class="form">
-              <input required type="email" class="w100" v-model="email.value" placeholder="Email" />
-              <input required type="password" class="w100" v-model="password.value" placeholder="Password" />
+              <input required type="email" class="w100" v-model="email" placeholder="Email" />
+              <input required type="password" class="w100" v-model="password" placeholder="Password" />
             </div>
+
+            <div class="forgot-password">
+              <router-link to="/pages/forgot-password">Forgot password?</router-link>
+            </div>
+
             <button type="submit" class="action" :class="{ 'action-disabled': !loginValid }">Submit</button>
           </form>
         </div>
@@ -29,14 +37,14 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const email = ref({ value: '', error: false })
-const password = ref({ value: '', error: false })
+const email = ref('')
+const password = ref('')
 
-const loginValid = computed(() => email.value.value && password.value.value)
+const loginValid = computed(() => email.value && password.value)
 
 const handleLogin = () => {
   if (loginValid.value) {
-    console.log('Login successful:', email.value.value, password.value.value)
+    console.log('Login successful:', email.value, password.value)
   }
 }
 </script>
@@ -102,5 +110,14 @@ const handleLogin = () => {
 .action-disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+.forgot-password {
+  text-align: right;
+  margin-bottom: 12px;
+}
+.forgot-password a {
+  font-size: 13px;
+  color: #007bff;
+  text-decoration: none;
 }
 </style>
